@@ -1,0 +1,49 @@
+{
+  "name": "@transak/transak-fuel",
+  "version": "0.0.1",
+  "description": "Connector package for transak and fuel network",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest -c jest.config.js",
+    "restricted-publish": "npm publish --access restricted",
+    "build": "npx tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Transak/transak-fuel.git"
+  },
+  "keywords": [
+    "transak",
+    "fuel"
+  ],
+  "author": "Sachin Thakur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Transak/transak-fuel/issues"
+  },
+  "homepage": "https://github.com/Transak/transak-fuel#readme",
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.24",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2"
+  },
+  "files": [
+    "/lib/**/*"
+  ],
+  "dependencies": {
+    "fuels": "^0.101.2"
+  }
+}
