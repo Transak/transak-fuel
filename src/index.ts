@@ -8,7 +8,7 @@ import { FEE_MULTIPLIERS, GAS_USED, TX_SIZE_BYTES } from "./constants";
  * @param network
  * @returns network config
  */
-const getNetwork = (network: string) => (network === 'main' ? networks[network] : networks.testnet);
+export const getNetwork = (network: string) => (network === 'main' ? networks[network] : networks.testnet);
 
 /**
  *
@@ -16,7 +16,7 @@ const getNetwork = (network: string) => (network === 'main' ? networks[network] 
  * @param network
  * @returns transaction link
  */
-const getTransactionLink = (txId: string, network: string, blockchainRid: string) => getNetwork(network).transactionLink(txId, blockchainRid);
+export const getTransactionLink = (txId: string, network: string) => getNetwork(network).transactionLink(txId);
 
 /**
  * get wallet link for the given address
@@ -24,7 +24,7 @@ const getTransactionLink = (txId: string, network: string, blockchainRid: string
  * @param network
  * @returns wallet link
  */
-const getWalletLink = (walletAddress: string, network: string) => getNetwork(network).walletLink(walletAddress);
+export const getWalletLink = (walletAddress: string, network: string) => getNetwork(network).walletLink(walletAddress);
 
 const getProvider = async (network: string) => {
     const networkConfig = getNetwork(network);
@@ -79,19 +79,18 @@ export const getTransaction = async (txId: string, network: string): Promise<Get
             network,
             nonce: 0,
             transactionHash: txId,
-            transactionLink: getTransactionLink(txId, network, ''),
+            transactionLink: getTransactionLink(txId, network),
         }
     };
 };
 
 
 
-export const isValidWalletAddress = async (walletAddress: string): Promise<boolean> => {
+export const isValidWalletAddress = (walletAddress: string): boolean => {
     try {
         new Address(walletAddress);
         return true;
     } catch (error) {
-        console.info(error);
         return false;
     }
 };
@@ -126,7 +125,7 @@ export const sendTransaction = async ({
                 nonce: 0,
                 to,
                 transactionHash: txResponse.id,
-                transactionLink: getTransactionLink(txResponse.id, network, ''),
+                transactionLink: getTransactionLink(txResponse.id, network),
                 transactionReceipt: receipts,
                 rejectReason: '',
             },
@@ -141,7 +140,7 @@ export const sendTransaction = async ({
 };
 
 
-const getBalance = async (walletAddress: string, assetId: string, network: string, decimals: number) => {
+export const getBalance = async (walletAddress: string, assetId: string, network: string, decimals: number) => {
     const address = new Address(walletAddress);
     const provider = await getProvider(network);
     const balance = await provider.getBalance(address, assetId);
