@@ -1,6 +1,6 @@
 {
   "name": "@transak/transak-fuel",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Connector package for transak and fuel network",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

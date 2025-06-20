@@ -9,7 +9,7 @@
       "lib": ["es2018", "dom"],
 
       /* js compiles to */
-      "outDir": "./dist",
+      "outDir": "lib",
 
       /* Strict Type-Checking Options */
       "strict": true,                           /* Enable all strict type-checking options. */
