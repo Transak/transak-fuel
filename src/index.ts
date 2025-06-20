@@ -88,8 +88,8 @@ export const getTransaction = async (txId: string, network: string): Promise<Get
 
 export const isValidWalletAddress = (walletAddress: string): boolean => {
     try {
-        new Address(walletAddress);
-        return true;
+        const address = new Address(walletAddress);
+        return address !== null;
     } catch (error) {
         return false;
     }
